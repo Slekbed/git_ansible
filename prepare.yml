@@ -1,0 +1,11 @@
+---
+- name: Prepare user
+  hosts: server
+  become: true
+  roles: 
+    - { role: os_prepare, tags: [prepare] }
+
+- name: Upload spme.files
+  hosts: application
+  roles: 
+    - role: upload

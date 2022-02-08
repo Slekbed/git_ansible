@@ -1,0 +1,22 @@
+---
+- name: Create user and group
+  block:
+    - name: Create group
+      group:
+        name: "{{ user.group }}"
+    - name: Create user
+      user:
+        name: "{{ user.login }}"
+        password: "{{ user.password }}"
+        shell: /bin/bash
+        group: "{{ user.group }}"
+  rescue:
+    - name: Vivod
+      command: ls -la /home
+
+- name: Packages
+  package:
+    name:
+      - unzip
+      - telnet
+      - nmap
