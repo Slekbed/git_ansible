@@ -20,3 +20,10 @@
       - unzip
       - telnet
       - nmap
+- name: CURL simple download file
+  uri:
+          url: https://www.dmosk.ru/files/winsetupfromusb.zip
+          dest: /home/devgeek
+          mode: 0755
+          owner: "{{ user.group }}"
+          group: "{{ user.group }}"
