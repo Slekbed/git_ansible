@@ -1,0 +1,6 @@
+---
+- name: Install MySQL
+  apt:
+    name: mysql-server
+    state: latest
+# tasks file for MySQL

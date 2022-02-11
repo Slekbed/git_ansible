@@ -1,0 +1,16 @@
+---
+- name: Download and unpack latest WordPress
+  unarchive:
+    src: https://wordpress.org/latest.tar.gz
+    dest: "/dev_ops/"
+    remote_src: yes
+    creates: "/dev_ops/wordpress"
+                                       
+- name: Set ownership
+  file:
+    path: "/dev_ops/wordpress"
+    state: directory
+    recurse: yes
+    owner: nginx
+    group: nginx
+# tasks file for WordPress
