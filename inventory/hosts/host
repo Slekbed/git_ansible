@@ -1,0 +1,6 @@
+[server]
+localhost
+
+[nginx]
+localhost  nginx_worker_proccess=4 nginx_user=nginx nginx_port=80 nginx_host=localhost 
+

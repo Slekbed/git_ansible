@@ -1,5 +1,8 @@
 - hosts: localhost
+
+  vars_files:
+    - /dev_ops/lesson_3/roles/nginx/vars/nginx.yml
   roles:
-    - MySQL 
-    - nginx
-    - WordPress
+    - { role: MySQL, tags: mysql } 
+    - { role: nginx, tags: nginx }
+    - { role: WordPress, tags: wordpress }

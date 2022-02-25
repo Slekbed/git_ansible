@@ -9,9 +9,9 @@
 
 - name:  add user
   group: 
-    name: nginx
+    name: "{{ name }}"
     state: present
 - name: Add a group
   user:
-    name: nginx
-    groups: nginx
+    name: "{{ name }}"
+    groups: "{{ groups }}"
