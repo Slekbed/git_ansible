@@ -1,8 +1,10 @@
-- hosts: localhost
+---
+- name: deploy
+  hosts: nginx
 
-  vars_files:
-    - /dev_ops/lesson_3/roles/nginx/vars/nginx.yml
+  #  vars_files:
+  # - /dev_ops/lesson_3/roles/nginx/vars/nginx.yml
   roles:
-    - { role: MySQL, tags: mysql } 
-    - { role: nginx, tags: nginx }
+    - { role: nginx, tags: nginx } 
+    - { role: MySQL, tags: mysql }
     - { role: WordPress, tags: wordpress }

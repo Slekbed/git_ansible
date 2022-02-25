@@ -1,17 +1,43 @@
 ---
 - name: Install Nginx
+  become: true
+  become_user: root
   apt:
     name: nginx
     state: latest
 
+- name: upload nginx.conf
+  template: 
+    src: "/dev_ops/lesson_3/roles/nginx/templates/nginx.conf.j2"
+    dest: "/etc/nginx/nginx.conf"
 
+- name: Check NGINX configs
+  shell: "/usr/sbin/nginx -t"
+  register: nginx_config_status
+- name: NGINX test status
+  debug:
+    msg: "{{ nginx_config_status }}"
+- name: NGINX test status
+  debug:
+    msg: "{{ nginx_config_status.rc }}"
+- name: Service NGINX restart and enable on boot
+  systemd:
+    name: nginx
+    state: restarted
+    enabled: yes
+    daemon_reload: yes 
+    when: nginx_config_status.rc == 0
 
+- name: Check nginx
+  command: "systemctl status nginx.service"
+  register: service_state
 
-- name:  add user
-  group: 
-    name: "{{ name }}"
-    state: present
-- name: Add a group
-  user:
-    name: "{{ name }}"
-    groups: "{{ groups }}"
+- name: check service
+  fail:
+    when: service_state is active
+
+- name: Uri
+  uri:
+    url: "http://localhost:{{ nginx_port }}"
+    status_code: 404
+    timeout: 1
