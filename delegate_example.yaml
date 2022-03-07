@@ -1,0 +1,9 @@
+---
+- name: Example
+  host: test
+  tasks:
+    - name: Req
+      uri:
+        url: "http://{{ ansible_host }}:{{ nginx.port }}/health"
+        status_code: 200
+      deligate_to: localhost
